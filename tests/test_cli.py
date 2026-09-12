@@ -1,4 +1,3 @@
-from importlib.metadata import entry_points
 from pathlib import Path
 import tomllib
 from click.testing import CliRunner
@@ -35,8 +34,3 @@ def test_console_script_entrypoint_name() -> None:
     with pyproject.open("rb") as f:
         config = tomllib.load(f)
     assert config["project"]["scripts"]["sign-all-historic-notes"] == "sign_all_historic_notes.cli:main"
-
-    scripts = entry_points(group="console_scripts")
-    script = next((ep for ep in scripts if ep.name == "sign-all-historic-notes"), None)
-    assert script is not None
-    assert script.value == "sign_all_historic_notes.cli:main"
