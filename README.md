@@ -12,3 +12,10 @@ pip install -e ".[dev]"
 sign-all-historic-notes --help
 pytest
 ```
+
+For test-only environments:
+
+```bash
+pip install -e ".[test]"
+pytest
+```

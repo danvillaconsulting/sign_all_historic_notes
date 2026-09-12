@@ -13,6 +13,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+test = [
+  "pytest>=8.0",
+]
 dev = [
   "pytest>=8.0",
   "sphinx>=7.0",
