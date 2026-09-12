@@ -3,5 +3,5 @@ Quickstart
 
 .. code-block:: bash
 
-   pip install -e ".[dev]"
+   pip install -e ".[test,dev]"
    sign-all-historic-notes --help

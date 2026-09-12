@@ -8,7 +8,7 @@ Minimal Python scaffold with:
 ## Quickstart
 
 ```bash
-pip install -e ".[dev]"
+pip install -e ".[test,dev]"
 sign-all-historic-notes --help
 pytest
 ```
