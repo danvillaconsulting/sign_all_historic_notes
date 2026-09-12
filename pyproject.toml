@@ -17,7 +17,6 @@ dependencies = [
 dev = [
   "pytest>=8.0",
   "sphinx>=7.0",
-  "tomli>=2.0; python_version < '3.11'",
 ]
 
 [project.scripts]
