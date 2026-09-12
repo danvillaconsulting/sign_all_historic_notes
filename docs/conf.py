@@ -1,5 +1,5 @@
-from pathlib import Path
 import tomllib
+from pathlib import Path
 
 pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
 with pyproject.open("rb") as f:
