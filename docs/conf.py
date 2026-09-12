@@ -1,9 +1,9 @@
-import tomllib
 from pathlib import Path
+import re
 
 pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
-with pyproject.open("rb") as f:
-    release = tomllib.load(f)["project"]["version"]
+match = re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(), re.MULTILINE)
+release = match.group(1) if match else "0.0.0"
 
 project = "sign_all_historic_notes"
 author = "danvillaconsulting"
