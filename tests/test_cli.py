@@ -1,4 +1,6 @@
+from importlib.metadata import entry_points
 from pathlib import Path
+import tomllib
 from click.testing import CliRunner
 
 from sign_all_historic_notes.cli import main
@@ -30,18 +32,11 @@ def test_cli_runs() -> None:
 
 def test_console_script_entrypoint_name() -> None:
     pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
-    scripts = {}
-    in_scripts = False
+    with pyproject.open("rb") as f:
+        config = tomllib.load(f)
+    assert config["project"]["scripts"]["sign-all-historic-notes"] == "sign_all_historic_notes.cli:main"
 
-    for line in pyproject.read_text().splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        if stripped.startswith("[") and stripped.endswith("]"):
-            in_scripts = stripped == "[project.scripts]"
-            continue
-        if in_scripts and "=" in stripped:
-            key, value = stripped.split("=", 1)
-            scripts[key.strip()] = value.strip().strip('"')
-
-    assert scripts["sign-all-historic-notes"] == "sign_all_historic_notes.cli:main"
+    scripts = entry_points(group="console_scripts")
+    script = next((ep for ep in scripts if ep.name == "sign-all-historic-notes"), None)
+    assert script is not None
+    assert script.value == "sign_all_historic_notes.cli:main"
