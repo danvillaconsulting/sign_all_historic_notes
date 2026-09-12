@@ -1,4 +1,10 @@
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover
+    import tomli as tomllib
+
 from click.testing import CliRunner
 
 from sign_all_historic_notes.cli import main
@@ -30,7 +36,7 @@ def test_cli_runs() -> None:
 
 def test_console_script_entrypoint_name() -> None:
     pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
-    text = pyproject.read_text()
+    with pyproject.open("rb") as f:
+        config = tomllib.load(f)
 
-    assert "[project.scripts]" in text
-    assert 'sign-all-historic-notes = "sign_all_historic_notes.cli:main"' in text
+    assert config["project"]["scripts"]["sign-all-historic-notes"] == "sign_all_historic_notes.cli:main"
