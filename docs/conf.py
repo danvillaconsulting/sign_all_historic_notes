@@ -1,6 +1,13 @@
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from sign_all_historic_notes import __version__
+
 project = "sign_all_historic_notes"
 author = "danvillaconsulting"
-release = "0.1.0"
+release = __version__
 
 extensions = []
 templates_path = ["_templates"]
