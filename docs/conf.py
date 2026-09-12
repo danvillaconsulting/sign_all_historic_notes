@@ -1,13 +1,12 @@
 from pathlib import Path
-import sys
+import tomllib
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
-from sign_all_historic_notes import __version__
+pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
+with pyproject.open("rb") as f:
+    release = tomllib.load(f)["project"]["version"]
 
 project = "sign_all_historic_notes"
 author = "danvillaconsulting"
-release = __version__
 
 extensions = []
 templates_path = ["_templates"]

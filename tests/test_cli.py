@@ -1,3 +1,6 @@
+import shutil
+import subprocess
+
 from click.testing import CliRunner
 
 from sign_all_historic_notes.cli import main
@@ -25,3 +28,18 @@ def test_cli_runs() -> None:
 
     assert result.exit_code == 0
     assert "sign_all_historic_notes is ready." in result.output
+
+
+def test_console_script_entrypoint_name() -> None:
+    executable = shutil.which("sign-all-historic-notes")
+    assert executable
+
+    result = subprocess.run(
+        [executable, "--help"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "Sign all historic notes." in result.stdout

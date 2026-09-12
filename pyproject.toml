@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sign-all-historic-notes"
+version = "0.1.0"
 description = "Rich Click CLI scaffold with Sphinx documentation."
 readme = "README.md"
 requires-python = ">=3.10"
-dynamic = ["version"]
 dependencies = [
   "click>=8.1",
   "rich-click>=1.8.3",
@@ -27,9 +27,6 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.setuptools.dynamic]
-version = {attr = "sign_all_historic_notes.__version__"}
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
